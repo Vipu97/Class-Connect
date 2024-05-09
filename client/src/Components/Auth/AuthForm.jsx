@@ -20,7 +20,6 @@ const AuthForm = ({
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log(user);
       await axios.post("/user", {
         _id: user.uid,
         email: user.email,
