@@ -10,7 +10,7 @@ const port = process.env.PORT;
 
 app.use(cors({
     credentials : true,
-    origin : 'http://localhost:5173'
+    origin : process.env.CLIENT_URL,
 }))
 
 
@@ -22,6 +22,6 @@ connectWithDB();
 
 app.use('',require('./routes'));
 
-app.listen(port,(req,res) => {
+app.listen(port,() => {
     console.log("Listening on Port:" + port);
 })
