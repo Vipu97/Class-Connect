@@ -52,7 +52,6 @@ const EventPage = () => {
   const fetchQuestions = async () => {
     setLoading(true);
     const { data } = await axios.get(`/question/code/${code}`);
-    //console.log(data);
     setQuestions(data);
     setLoading(false);
   };

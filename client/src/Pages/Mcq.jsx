@@ -22,7 +22,6 @@ const Mcq = () => {
   useEffect(() => {
     const fetchQuestionDetails = async () => {
       const {data} = await axios.get(`/question/${questId}`);
-      console.log(data);
       if(data){
         setQuestion(data.question);
         setEventCode(data.eventCode);
