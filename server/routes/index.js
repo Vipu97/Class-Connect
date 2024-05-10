@@ -10,7 +10,7 @@ router.use('/user', userController);
 router.use('/event', eventController);
 router.use('/question', questionController);
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: '/tmp' });
 
 //route to generate tokens for meeting
 router.get("/get-token", (req, res) => {
