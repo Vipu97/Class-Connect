@@ -44,7 +44,6 @@ const Slide = () => {
 
   const fetchQuestionDetails = async () => {
     const {data} = await axios.get(`/question/${questId}`);
-    console.log(data);
     setEventCode(data.eventCode);
     setSlideTitle(data.question);
     setContent(data.answers[0]);
