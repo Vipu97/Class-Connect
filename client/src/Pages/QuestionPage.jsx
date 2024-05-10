@@ -83,7 +83,12 @@ const QuestionPage = () => {
   const createResponse = () => {
     const defaultResponse = [];
     for (let i of questions) {
-      defaultResponse.push({ questId: i._id, answers: null });
+      if(i.type === "slide"){
+        defaultResponse.push({ questId: i._id, answers: "not required" });
+      }
+      else{
+        defaultResponse.push({ questId: i._id, answers: null });
+      }
     }
     setResponse(defaultResponse);
   };

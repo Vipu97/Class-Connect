@@ -3,7 +3,6 @@ const Event = require("../Models/Event");
 const router = express.Router();
 const {generateEventCode} = require("../utils/helper");
 
-
 //route to create new event
 router.post("/", async(req,res) => {
     try{
@@ -68,7 +67,6 @@ router.delete("/:eventId", async(req,res) => {
 router.post('/response',async(req,res) => {
     try{
         const {userId,response,code,userName} = req.body;
-        console.log(req.body)
         const foundEvent = await Event.findOne({eventCode : code});
         foundEvent.responses.push({userId,response,userName});
         await foundEvent.save();

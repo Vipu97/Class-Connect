@@ -52,7 +52,7 @@ const Auth = () => {
               className="rounded-3xl h-[42px] px-4 outline-none border-gray border-2
                    focus:border-black w-2/3 shrink"
               value={eventCode}
-              onChange={(e) => setEventCode(e.target.value)}
+              onChange={(e) => setEventCode(e.target.value.toUpperCase())}
             />
             <Button
               text={"Join!"}
