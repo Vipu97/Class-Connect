@@ -6,7 +6,7 @@ import QuestionsModal from "../Components/EventPage/QuestionsModal";
 import QuestionsList from "../Components/EventPage/QuestionsList";
 import CustomSpinner from "../Components/CustomSpinner";
 import { Link } from "react-router-dom";
-import { Tooltip } from "@chakra-ui/react";
+import { Tooltip, useToast } from "@chakra-ui/react";
 
 const EventPage = () => {
   const { code } = useParams();
@@ -17,6 +17,7 @@ const EventPage = () => {
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(false);
   const clipBoard = navigator.clipboard;
+  const toast = useToast();
 
     
   const updateEventName = async () => {
@@ -31,6 +32,10 @@ const EventPage = () => {
     await axios.delete(`/question/${questId}`);
     const { data } = await axios.get(`/question/code/${code}`);
     setQuestions(data);
+    return toast({
+      status : "success",
+      title : "Question deleted successfully",
+    })
   };
   
   const handleResetButton = async () => {

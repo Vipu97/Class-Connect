@@ -1,17 +1,33 @@
 import React from "react";
 import { Link,useNavigate } from "react-router-dom";
 import { useUserContext } from "../../Context/userContext";
-import { Tooltip } from "@chakra-ui/react";
+import { Tooltip, useToast } from "@chakra-ui/react";
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
+import { auth } from "../../utils/firebase";
 
 const Layout = () => {
-  const { user } = useUserContext();
+  const { user,setUser } = useUserContext();
   const navigate = useNavigate();
+  const toast = useToast();
   const navigateToProfile = () => {
     const currentUrl = window.location.href;
     navigate("/profile");
     sessionStorage.setItem("returnUrl",currentUrl);
   }
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      setUser(null);
+      toast({
+        status: "success",
+        title: "Logout Successfully",
+      });
+      navigate("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+  
   return (
     <header className="flex justify-between py-3 items-center">
       <Link className="text-[27px] font-black text-blue" to={"/home"}>
@@ -64,7 +80,7 @@ const Layout = () => {
                 />
               </svg>
 
-              <Link to={"/login"}>Sign Out</Link>
+              <button onClick={handleLogout}>Sign Out</button>
             </button>
           </MenuItem>
         </MenuList>

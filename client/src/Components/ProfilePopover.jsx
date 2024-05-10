@@ -1,11 +1,13 @@
-import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Menu, MenuButton, MenuList, MenuItem, Button, useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../utils/firebase";
 import { useUserContext } from "../Context/userContext";
 import { Tooltip } from "@chakra-ui/react";
 
 export default function ProfilePopover({ user }) {
   const { setUser } = useUserContext();
   const navigate = useNavigate();
+  const toast = useToast();
  
   const navigateToProfile = () => {
     const currentUrl = window.location.href;
@@ -73,7 +75,7 @@ export default function ProfilePopover({ user }) {
               />
             </svg>
 
-            <Link to={"/login"}>Sign Out</Link>
+            <button onClick={handleLogout}>Sign Out</button>
           </button>
         </MenuItem>
       </MenuList>
