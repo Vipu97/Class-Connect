@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { createContext } from 'react';
 import { onAuthStateChanged } from "firebase/auth";

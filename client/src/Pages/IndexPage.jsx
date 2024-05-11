@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Hero from "../Components/IndexPage/Hero";
 import Button from "../Components/Button";
 import Header from "../Components/Header";
@@ -11,23 +11,40 @@ const IndexPage = () => {
   const [eventCode, setEventCode] = useState("");
   const toast = useToast();
   const navigate = useNavigate();
+  const inputRef = useRef();
+
+  async function fetchData(eventCode) {
+    try {
+      const { data } = await axios.get(`/event/${eventCode}`);
+      if (!data) throw error;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   const handleClick = async () => {
     if (eventCode === "") {
+      inputRef.current.focus();
       return toast({
         title: "Event Code is empty",
         status: "error",
       });
     }
-    const { data } = await axios.get(`/event/${eventCode}`);
-    if (!data) {
-      toast({
+    toast.promise(fetchData(eventCode), {
+      loading: {
+        title: "Validating Event Code",
+        description: "Please wait...",
+      },
+      success: {
+        title: "Event Found",
+        duration : "1000",
+        onCloseComplete: () => navigate(`/event/submit/${eventCode}`),
+      },
+      error: {
         title: "Invalid Event Code",
         description: "No event currently exist for the given code",
-        status: "error",
-      });
-      return;
-    }
-    navigate(`/event/submit/${eventCode}`);
+      },
+    });
   };
   return (
     <>
@@ -60,6 +77,7 @@ const IndexPage = () => {
             w-64 grow"
               value={eventCode}
               onChange={(e) => setEventCode(e.target.value.toUpperCase())}
+              ref={inputRef}
             />
             <Button
               text={"Go!"}

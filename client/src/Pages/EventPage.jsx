@@ -19,7 +19,6 @@ const EventPage = () => {
   const clipBoard = navigator.clipboard;
   const toast = useToast();
 
-    
   const updateEventName = async () => {
       await axios.put("/event/eventName", {
         eventCode: code,
@@ -128,7 +127,7 @@ const EventPage = () => {
           <input
             type="text"
             className="border-[1px] py-1 px-2 w-36 xs:w-48 text-nowrap"
-            value={`http:localhost:5173/event/submit/${code}`}
+            value={`${import.meta.env.VITE_DOMAIN}/event/submit/${code}`}
             readOnly
           />
           <Tooltip label="copy link">
@@ -140,7 +139,7 @@ const EventPage = () => {
               stroke="currentColor"
               className="w-6 h-6 cursor-pointer hover:text-blue"
               onClick={() =>
-                clipBoard.writeText(`http:localhost:5173/event/submit/${code}`)
+                clipBoard.writeText(`${import.meta.env.VITE_DOMAIN}/event/submit/${code}`)
               }
             >
               <path

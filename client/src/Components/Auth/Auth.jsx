@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Button from "../Button";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
@@ -8,23 +8,40 @@ const Auth = () => {
   const [eventCode, setEventCode] = useState("");
   const toast = useToast();
   const navigate = useNavigate();
+  const inputRef = useRef();
+
+  async function fetchData(eventCode) {
+    try {
+      const { data } = await axios.get(`/event/${eventCode}`);
+      if (!data) throw error;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   const handleJoinEvent = async () => {
     if (eventCode == "") {
+      inputRef.current.focus();
       return toast({
         status: "error",
         title: "Event code is empty",
       });
     }
-    const { data } = await axios.get(`/event/${eventCode}`);
-    if (!data) {
-      toast({
+    toast.promise(fetchData(eventCode), {
+      loading: {
+        title: "Validating Event Code",
+        description: "Please wait...",
+      },
+      success: {
+        title: "Event Found",
+        duration: "1000",
+        onCloseComplete: () => navigate(`/event/submit/${eventCode}`),
+      },
+      error: {
         title: "Invalid Event Code",
         description: "No event currently exist for the given code",
-        status: "error",
-      });
-      return;
-    }
-    navigate(`/event/submit/${eventCode}`);
+      },
+    });
   };
   return (
     <div className="h-96 bg-white md:w-[600px] lg:h-[100vh] mx-auto lg:mx-0">
@@ -50,9 +67,10 @@ const Auth = () => {
               type="text"
               placeholder="Event code"
               className="rounded-3xl h-[42px] px-4 outline-none border-gray border-2
-                   focus:border-black w-2/3 shrink"
+                   focus:border-blue w-2/3 shrink"
               value={eventCode}
               onChange={(e) => setEventCode(e.target.value.toUpperCase())}
+              ref={inputRef}
             />
             <Button
               text={"Join!"}
