@@ -6,19 +6,20 @@ import EventsList from "../Components/HomePage/EventsList";
 import CustomSpinner from "../Components/CustomSpinner";
 import { useUserContext } from "../Context/userContext";
 import { useToast } from "@chakra-ui/react";
+import NoEvents from "../Components/HomePage/NoEvents";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [events, setEvents] = useState(null);
+  const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [eventCode,setEventCode] = useState(null);
-  const [refresh,setRefresh] = useState(false);
-  const {user} = useUserContext();
+  const [eventCode, setEventCode] = useState(null);
+  const [refresh, setRefresh] = useState(false);
+  const { user } = useUserContext();
   const userId = user?.id;
   const toast = useToast();
 
   const createNewEvent = async () => {
-    const { data } = await axios.post("/event" , {userId});
+    const { data } = await axios.post("/event", { userId });
     const eventCode = data.eventCode;
     setEventCode(eventCode);
     navigate(`/event/${eventCode}`);
@@ -28,8 +29,8 @@ const HomePage = () => {
     await axios.delete(`/question/event/${eventCode}`);
     setEvents(prevEvents => prevEvents.filter(event => event?.id !== eventId));
     toast({
-      status : "success",
-      title : "Event Deleted Successfully"
+      status: "success",
+      title: "Event Deleted Successfully"
     })
     setRefresh(!refresh);
   };
@@ -37,13 +38,13 @@ const HomePage = () => {
   const fetchEvents = useCallback(async () => {
     const { data } = await axios.get(`/event/user/${userId}`);
     setEvents(data);
-  },[userId]);
+  }, [userId]);
 
   useEffect(() => {
-    if(userId)
+    if (userId)
       fetchEvents();
     setLoading(false);
-  },[userId,refresh])
+  }, [userId, refresh])
 
 
   if (loading) return <CustomSpinner />;
@@ -81,7 +82,7 @@ const HomePage = () => {
         </h1>
         <button
           className="flex gap-1 rounded-3xl  py-2 px-3 bg-blue hover:scale-105 mr-auto"
-          to = {'/meeting'}
+          to={'/meeting'}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +99,9 @@ const HomePage = () => {
           <span className="font-extrabold text-white" onClick={createNewEvent}>Create event</span>
         </button>
       </div>
-      <EventsList events={events} deleteEvent={deleteEvent} />
+      {events.length === 0 ? <NoEvents userName={user.name} createNewEvent={createNewEvent} /> :
+        <EventsList events={events} deleteEvent={deleteEvent} />
+      }
     </div>
   );
 };

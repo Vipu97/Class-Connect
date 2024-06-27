@@ -7,6 +7,7 @@ import QuestionsList from "../Components/EventPage/QuestionsList";
 import CustomSpinner from "../Components/CustomSpinner";
 import { Link } from "react-router-dom";
 import { Tooltip, useToast } from "@chakra-ui/react";
+import NoQuestion from "../Components/EventPage/NoQuestion";
 
 const EventPage = () => {
   const { code } = useParams();
@@ -20,23 +21,23 @@ const EventPage = () => {
   const toast = useToast();
 
   const updateEventName = async () => {
-      await axios.put("/event/eventName", {
-        eventCode: code,
+    await axios.put("/event/eventName", {
+      eventCode: code,
       newEventName: eventName,
     });
     setOpenEditModal(false);
   };
-  
+
   const deleteQuestion = async (questId) => {
     await axios.delete(`/question/${questId}`);
     const { data } = await axios.get(`/question/code/${code}`);
     setQuestions(data);
     return toast({
-      status : "success",
-      title : "Question deleted successfully",
+      status: "success",
+      title: "Question deleted successfully",
     })
   };
-  
+
   const handleResetButton = async () => {
     await axios.delete(`/event/reset/${code}`);
     setRefresh(ref => !ref);
@@ -55,10 +56,10 @@ const EventPage = () => {
     setLoading(false);
   };
   useEffect(() => {
-  fetchEventDetails();
-  fetchQuestions();
-}, [refresh]);
-  
+    fetchEventDetails();
+    fetchQuestions();
+  }, [refresh]);
+
   if (loading) return <CustomSpinner />;
   return (
     <div className="px-4 sm:px-8">
@@ -175,13 +176,15 @@ const EventPage = () => {
           </div>
         </div>
       )}
-      <QuestionsModal eventId={event._id} code={code} event = {event} />
-      <QuestionsList
-        questions={questions}
-        code={code}
-        deleteQuestion={deleteQuestion}
-        event = {event}
-      />
+      <QuestionsModal eventId={event._id} code={code} event={event} />
+      {questions.length === 0 ? <NoQuestion /> :
+        <QuestionsList
+          questions={questions}
+          code={code}
+          deleteQuestion={deleteQuestion}
+          event={event}
+        />
+      }
     </div>
   );
 };

@@ -27,7 +27,7 @@ const RegisterPage = () => {
       setLoading(true);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        email,
+        email.toLowerCase(),
         password,
         name
       )
@@ -41,9 +41,7 @@ const RegisterPage = () => {
         status : "success",
         title : "Registration Successfull"
       })
-      setLoading(false);
     }catch(error){
-        console.log(error.code);
         if(error.code == "auth/email-already-in-use"){
           return toast({
             status : "info",
@@ -58,7 +56,10 @@ const RegisterPage = () => {
             description : "Minimum 6 characters are required"
           })
         }
-      };
+      }
+      finally{
+        setLoading(false);
+      }
   };
   
   if(loading)

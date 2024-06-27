@@ -54,7 +54,6 @@ router.get("/user/:userId" , async(req,res) => {
 router.delete("/:eventId", async(req,res) => {
     try{
         const {eventId} = req.params;
-        console.log(eventId);
         await Event.findByIdAndDelete(eventId);
         res.status(200).json("Event Deleted");
 

@@ -6,15 +6,13 @@ import CustomSpinner from "../Components/CustomSpinner";
 import { useUserContext } from "../Context/userContext";
 import { useToast } from "@chakra-ui/react";
 import ProfilePopover from "../Components/ProfilePopover";
-import PollOrMcq from "../Components/QuestionDisplay/PollOrMcq";
-import Sort from "../Components/QuestionDisplay/Sort";
-import Open from "../Components/QuestionDisplay/Open";
-import Slide from "../Components/QuestionDisplay/Slide";
+import ZeroQuestions from "../Components/QuestionDisplay/ZeroQuestions";
+import List from "../Components/QuestionDisplay/List";
 
 const QuestionPage = () => {
   const { code } = useParams();
   const [questions, setQuestions] = useState([]);
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState([]);
   const [alreadyResponded, setAlReadyResponded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -83,10 +81,10 @@ const QuestionPage = () => {
   const createResponse = () => {
     const defaultResponse = [];
     for (let i of questions) {
-      if(i.type === "slide"){
+      if (i.type === "slide") {
         defaultResponse.push({ questId: i._id, answers: "not required" });
       }
-      else{
+      else {
         defaultResponse.push({ questId: i._id, answers: null });
       }
     }
@@ -112,7 +110,7 @@ const QuestionPage = () => {
   if (loading) return <CustomSpinner />;
   return (
     <>
-      {user && alreadyResponded  ? (
+      {user && alreadyResponded ? (
         <Responded name={user?.name} />
       ) : (
         <div>
@@ -132,64 +130,7 @@ const QuestionPage = () => {
               </button>
             )}
           </header>
-          <main className="flex flex-col justify-center gap-20 mt-10 px-2">
-            {questions.map((quest, index) => {
-              return (
-                <div
-                  className="flex flex-col justify-center gap-4"
-                  key={quest._id}
-                >
-                  <div className="flex justify-center">
-                    <h1 className="text-2xl font-extrabold text-center max-w-[1000px] px-2">
-                      {quest.type !== "slide" && quest.question}
-                    </h1>
-                  </div>
-
-                  {quest.type === "open" && (
-                    <Open
-                      quest={quest}
-                      response={response}
-                      setResponse={setResponse}
-                      index={index}
-                    />
-                  )}
-
-                  {quest.type === "sorting" && (
-                    <Sort
-                      options={quest.options}
-                      response={response}
-                      setResponse={setResponse}
-                      idx={index}
-                    />
-                  )}
-
-                  {(quest.type === "poll" || quest.type === "mcq") && (
-                    <PollOrMcq
-                      index={index}
-                      options={quest.options}
-                      response={response}
-                      setResponse={setResponse}
-                    />
-                  )}
-                  {quest.type === "slide" && (
-                    <Slide
-                      title={quest.question}
-                      content={quest.answers}
-                      photo={quest.photos}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </main>
-          <footer className="my-10 flex justify-center">
-            <button
-              className="w-full py-2 px-5 text-blue font-black text-2xl max-w-[400px] shadow-question rounded-3xl hover:scale-105 hover:border-blue hover:border-2"
-              onClick={submitAnswer}
-            >
-              Submit
-            </button>
-          </footer>
+          {questions.length === 0 ? <ZeroQuestions /> : <List questions={questions} submitAnswer={submitAnswer}/>}
         </div>
       )}
     </>
