@@ -8,6 +8,8 @@ import CustomSpinner from "../Components/CustomSpinner";
 import { Link } from "react-router-dom";
 import { Tooltip, useToast } from "@chakra-ui/react";
 import NoQuestion from "../Components/EventPage/NoQuestion";
+import DeleteQuestionMenu from "../Components/EventPage/DeleteQuestionMenu";
+import ResetEventModal from "../Components/EventPage/ResetEventModal";
 
 const EventPage = () => {
   const { code } = useParams();
@@ -38,7 +40,7 @@ const EventPage = () => {
     })
   };
 
-  const handleResetButton = async () => {
+  const handleResetEvent = async () => {
     await axios.delete(`/event/reset/${code}`);
     setRefresh(ref => !ref);
   };
@@ -160,12 +162,7 @@ const EventPage = () => {
             audience.
           </h1>
           <div className="ml-auto mt-2 flex gap-3">
-            <button
-              className="bg-white py-2 px-3 xs:px-5 rounded-3xl font-extrabold hover:bg-[#f2f5f7] hover:scale-105"
-              onClick={handleResetButton}
-            >
-              Reset Event
-            </button>
+              <ResetEventModal handleResetEvent={handleResetEvent} />
             <Link
               className="bg-blue py-2 px-3 xs:px-5 rounded-3xl
            text-white font-extrabold hover:scale-105"

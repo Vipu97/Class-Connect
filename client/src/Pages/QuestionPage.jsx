@@ -130,7 +130,7 @@ const QuestionPage = () => {
               </button>
             )}
           </header>
-          {questions.length === 0 ? <ZeroQuestions /> : <List questions={questions} submitAnswer={submitAnswer}/>}
+          {questions.length === 0 ? <ZeroQuestions /> : <List questions={questions} submitAnswer={submitAnswer} response={response} setResponse = {setResponse} />}
         </div>
       )}
     </>

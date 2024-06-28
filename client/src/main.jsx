@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           variant: "subtle",
           containerStyle : {
             maxWidth : "400px"
-          }
+          },
         },
       }}
     >

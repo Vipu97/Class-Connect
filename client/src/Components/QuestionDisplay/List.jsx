@@ -4,7 +4,7 @@ import PollOrMcq from "./PollOrMcq";
 import Open from "./Open";
 import Sort from "./Sort";
 
-const List = ({questions,submitAnswer}) => {
+const List = ({questions,submitAnswer,response,setResponse}) => {
     return (
         <div>
             <main className="flex flex-col justify-center gap-20 mt-10 px-2">
