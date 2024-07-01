@@ -99,7 +99,7 @@ const HomePage = () => {
           <span className="font-extrabold text-white" onClick={createNewEvent}>Create event</span>
         </button>
       </div>
-      {events.length === 0 ? <NoEvents userName={user.name} createNewEvent={createNewEvent} /> :
+      {(events.length === 0 && !loading) ? <NoEvents userName={user.name} createNewEvent={createNewEvent} /> :
         <EventsList events={events} deleteEvent={deleteEvent} />
       }
     </div>

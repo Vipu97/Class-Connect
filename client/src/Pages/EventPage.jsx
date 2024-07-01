@@ -8,7 +8,6 @@ import CustomSpinner from "../Components/CustomSpinner";
 import { Link } from "react-router-dom";
 import { Tooltip, useToast } from "@chakra-ui/react";
 import NoQuestion from "../Components/EventPage/NoQuestion";
-import DeleteQuestionMenu from "../Components/EventPage/DeleteQuestionMenu";
 import ResetEventModal from "../Components/EventPage/ResetEventModal";
 
 const EventPage = () => {
@@ -17,7 +16,7 @@ const EventPage = () => {
   const [questions, setQuestions] = useState([]);
   const [eventName, setEventName] = useState("My new event");
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const clipBoard = navigator.clipboard;
   const toast = useToast();
@@ -45,21 +44,19 @@ const EventPage = () => {
     setRefresh(ref => !ref);
   };
   const fetchEventDetails = async () => {
-    setLoading(true);
     const { data } = await axios.get(`/event/${code}`);
     setEvent(data);
     setEventName(data.name);
-    setLoading(false);
   };
   const fetchQuestions = async () => {
-    setLoading(true);
     const { data } = await axios.get(`/question/code/${code}`);
     setQuestions(data);
-    setLoading(false);
   };
   useEffect(() => {
+    setLoading(true);
     fetchEventDetails();
     fetchQuestions();
+    setLoading(false);
   }, [refresh]);
 
   if (loading) return <CustomSpinner />;
@@ -174,7 +171,7 @@ const EventPage = () => {
         </div>
       )}
       <QuestionsModal eventId={event._id} code={code} event={event} />
-      {questions.length === 0 ? <NoQuestion /> :
+      {(questions.length === 0 && !loading) ? <NoQuestion /> :
         <QuestionsList
           questions={questions}
           code={code}
