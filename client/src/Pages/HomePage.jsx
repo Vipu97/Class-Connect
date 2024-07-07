@@ -38,12 +38,12 @@ const HomePage = () => {
   const fetchEvents = useCallback(async () => {
     const { data } = await axios.get(`/event/user/${userId}`);
     setEvents(data);
+    setLoading(false);
   }, [userId]);
 
   useEffect(() => {
     if (userId)
       fetchEvents();
-    setLoading(false);
   }, [userId, refresh])
 
 

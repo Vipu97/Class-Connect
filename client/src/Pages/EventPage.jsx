@@ -47,6 +47,7 @@ const EventPage = () => {
     const { data } = await axios.get(`/event/${code}`);
     setEvent(data);
     setEventName(data.name);
+    setLoading(false);
   };
   const fetchQuestions = async () => {
     const { data } = await axios.get(`/question/code/${code}`);
@@ -56,7 +57,6 @@ const EventPage = () => {
     setLoading(true);
     fetchEventDetails();
     fetchQuestions();
-    setLoading(false);
   }, [refresh]);
 
   if (loading) return <CustomSpinner />;
