@@ -19,9 +19,10 @@ const QuestionsModal = ({ code, event }) => {
   const handleCreateQuestion = () => {
     if (event.responses.length > 0) {
       return toast({
-        status: "error",
-        title: "Question can't be Created",
-        description : "Your event has already responses you have to reset your event if you want to add new questions"
+        status: "info",
+        title: "New Question can't be Created",
+        description : "Your event has already responses you have to reset your event if you want to add new questions",
+        duration : 6000,
       });
     }
     else

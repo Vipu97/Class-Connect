@@ -57,7 +57,6 @@ const LoginPage = () => {
         email,
         password
       );
-      const user = userCredential.user;
       const returnUrl = sessionStorage.getItem('returnUrl');
       if(returnUrl){
         sessionStorage.removeItem("returnUrl");

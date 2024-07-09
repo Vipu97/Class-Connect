@@ -30,6 +30,14 @@ const EventPage = () => {
   };
 
   const deleteQuestion = async (questId) => {
+    if(event.responses.length > 0){
+      return toast({
+        status : "info",
+        title : "Question can't be delete",
+        description : "You can't delete questions which already have responses. You have to reset the event if you want to delete any question.",
+        duration : 6000,
+      })
+    }
     await axios.delete(`/question/${questId}`);
     const { data } = await axios.get(`/question/code/${code}`);
     setQuestions(data);

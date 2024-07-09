@@ -110,29 +110,28 @@ const QuestionPage = () => {
   if (loading) return <CustomSpinner />;
   return (
     <>
-      {user && alreadyResponded ? (
-        <Responded name={user?.name} />
-      ) : (
-        <div>
-          <header
-            className="bg-blue w-full h-[70px] flex py-4 pl-5 pr-3 
+      <div>
+        <header
+          className="bg-blue w-full h-[70px] flex py-4 pl-5 pr-3 
           justify-between sm:pl-9 sm:pr-6"
-          >
-            <Link className="font-black text-2xl text-white">wooclap</Link>
-            {isLoggedIn ? (
-              <ProfilePopover user={user} />
-            ) : (
-              <button
-                className="bg-white w-24 h-10 rounded-3xl font-extrabold border-white text-md border-2 hover:border-black flex items-center justify-center"
-                onClick={handleSignIn}
-              >
-                Sign In
-              </button>
-            )}
-          </header>
-          {(questions.length === 0 && !loading) ? <ZeroQuestions /> : <List questions={questions} submitAnswer={submitAnswer} response={response} setResponse = {setResponse} />}
-        </div>
-      )}
+        >
+          <Link className="font-black text-2xl text-white">wooclap</Link>
+          {isLoggedIn ? (
+            <ProfilePopover user={user} />
+          ) : (
+            <button
+              className="bg-white w-24 h-10 rounded-3xl font-extrabold border-white text-md border-2 hover:border-black flex items-center justify-center"
+              onClick={handleSignIn}
+            >
+              Sign In
+            </button>
+          )}
+        </header>
+        {user && alreadyResponded ? <Responded name={user?.name} /> : (
+          (questions.length === 0 && !loading) ? <ZeroQuestions /> : <List questions={questions} submitAnswer={submitAnswer} response={response} setResponse={setResponse} />
+        )}
+      </div>
+
     </>
   );
 };

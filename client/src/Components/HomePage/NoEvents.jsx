@@ -1,4 +1,5 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect} from 'react';
+import CustomSpinner from '../CustomSpinner';
 
 const NoEvents = ({ userName, createNewEvent }) => {
   const [wait, setWait] = useState(true);
