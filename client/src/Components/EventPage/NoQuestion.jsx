@@ -6,8 +6,9 @@ const NoQuestion = () => {
   useEffect(() => {
     setTimeout(() => {
       setWait(false);
-    },1500);
+    },1000);
   },[]);
+  
   if(wait)
     return <CustomSpinner />;
   return (
