@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import CustomSpinner from "../CustomSpinner";
 
 const AuthForm = ({
   text,
@@ -11,9 +10,9 @@ const AuthForm = ({
   password,
   setPassword,
   handleResetPassword,
+  setLoading
 }) => {
   const [hidePassword, setHidePassword] = useState(true);
-  const [loading, setLoading] = useState(false);
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
   const navigate = useNavigate();
@@ -43,8 +42,6 @@ const AuthForm = ({
     }
   };
 
-  if (loading)
-    return <CustomSpinner />;
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex w-full max-w-[320px]">

@@ -119,6 +119,7 @@ const RegisterPage = () => {
               setEmail={setEmail}
               password={password}
               setPassword={setPassword}
+              setLoading={setLoading}
             />
           </form>
         </div>

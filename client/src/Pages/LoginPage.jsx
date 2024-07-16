@@ -117,6 +117,7 @@ const LoginPage = () => {
                 password={password}
                 setPassword={setPassword}
                 handleResetPassword={handleResetPassword}
+                setLoading={setLoading}
               />
             </form>
           </div>
