@@ -1,15 +1,6 @@
-import React,{useState, useEffect} from 'react';
-import CustomSpinner from '../CustomSpinner';
+import React from 'react';
 
 const NoEvents = ({ userName, createNewEvent }) => {
-  const [wait, setWait] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setWait(false);
-    }, 1500);
-  }, []);
-  if (wait)
-    return <CustomSpinner />;
   return (
     <div className='flex flex-col justify-center items-center text-center space-y-3 mt-10 w-full max-w-[850px] mx-auto'>
       <h1 className='text-2xl xs:text-3xl font-extrabold text-[#1d254f]'>Welcome to Wooclap, {userName.split(" ")[0]}! </h1>

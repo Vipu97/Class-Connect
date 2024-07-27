@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState, lazy } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Layout from "../Components/HomePage/Layout";
-import EventsList from "../Components/HomePage/EventsList";
 import CustomSpinner from "../Components/CustomSpinner";
 import { useUserContext } from "../Context/userContext";
 import { useToast } from "@chakra-ui/react";
 import NoEvents from "../Components/HomePage/NoEvents";
+
+const EventsList = lazy(() => import("../Components/HomePage/EventsList"));
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -19,33 +20,44 @@ const HomePage = () => {
   const toast = useToast();
 
   const createNewEvent = async () => {
-    const { data } = await axios.post("/event", { userId });
-    const eventCode = data.eventCode;
-    setEventCode(eventCode);
-    navigate(`/event/${eventCode}`);
+    try {
+      const { data } = await axios.post("/event", { userId });
+      const eventCode = data.eventCode;
+      setEventCode(eventCode);
+      navigate(`/event/${eventCode}`);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
   const deleteEvent = async (eventId) => {
-    await axios.delete(`/event/${eventId}`);
-    await axios.delete(`/question/event/${eventCode}`);
-    setEvents(prevEvents => prevEvents.filter(event => event?.id !== eventId));
-    toast({
-      status: "success",
-      title: "Event Deleted Successfully"
-    })
-    setRefresh(!refresh);
+    try {
+      await axios.delete(`/event/${eventId}`);
+      await axios.delete(`/question/event/${eventCode}`);
+      setEvents(prevEvents => prevEvents.filter(event => event?.id !== eventId));
+      toast({
+        status: "success",
+        title: "Event Deleted Successfully"
+      })
+      setRefresh(!refresh);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   const fetchEvents = useCallback(async () => {
-    const { data } = await axios.get(`/event/user/${userId}`);
-    setEvents(data);
-    setLoading(false);
+    try {
+      const { data } = await axios.get(`/event/user/${userId}`);
+      setEvents(data);
+      setLoading(false);
+    } catch (err) {
+      console.error(err.message);
+    }
   }, [userId]);
 
   useEffect(() => {
     if (userId)
       fetchEvents();
   }, [userId, refresh])
-
 
   if (loading) return <CustomSpinner />;
   return (
@@ -99,8 +111,10 @@ const HomePage = () => {
           <span className="font-extrabold text-white" onClick={createNewEvent}>Create event</span>
         </button>
       </div>
-      {(events.length === 0 && !loading) ? <NoEvents userName={user.name} createNewEvent={createNewEvent} /> :
+      <Suspense fallback={<CustomSpinner />}>
         <EventsList events={events} deleteEvent={deleteEvent} />
+      </Suspense>
+      {(events.length === 0 && !loading) && <NoEvents userName={user.name} createNewEvent={createNewEvent} />
       }
     </div>
   );

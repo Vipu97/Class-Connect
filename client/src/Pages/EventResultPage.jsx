@@ -31,9 +31,9 @@ const EventResultPage = ({ response, code }) => {
   };
   const countCorrectAnswer = (index) => {
     let count = 0;
-    for(let i of response){
-      if(i.response[index].answers === questions[index].answers[0])
-         count++;
+    for (let i of response) {
+      if (i.response[index].answers === questions[index].answers[0])
+        count++;
     }
     return count;
   };
@@ -43,7 +43,6 @@ const EventResultPage = ({ response, code }) => {
     let count = 0;
     for (let i of response) {
       for (let j of i.response) {
-        //console.log(j);
         if (j.questId == quesId) {
           count++;
           break;
@@ -82,7 +81,7 @@ const EventResultPage = ({ response, code }) => {
                 className="flex gap-2 text-[22px]
                  text-[#1d254f]"
               >
-                <img src={`/${ques.type}.svg`} alt="question-icons" className="mr-2 h-[22px] w-[26px] mt-1"/>
+                <img src={`/${ques.type}.svg`} alt="question-icons" className="mr-2 h-[22px] w-[26px] mt-1" />
                 <h1>{index + 1}.</h1>
                 <h1>{ques.question}</h1>
               </div>
@@ -129,16 +128,16 @@ const EventResultPage = ({ response, code }) => {
                     );
                   })}
                 {ques.type === "open" &&
-                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2">
                     {
                       getAllAnswers(ques._id).map((ans, index) => (
                         <Open ans={ans} index={index} />
                       ))}
 
-                </div>
+                  </div>
                 }
-                {ques.type == "sorting" && <Sort options = {ques.options} res={response} index = {index} answers = {ques.answers}/>}
-                {ques.type === "slide" && <Slide content = {ques.answers} photo={ques.photos} />}
+                {ques.type == "sorting" && <Sort options={ques.options} res={response} index={index} answers={ques.answers} />}
+                {ques.type === "slide" && <Slide content={ques.answers} photo={ques.photos} />}
               </div>
             )}
           </div>

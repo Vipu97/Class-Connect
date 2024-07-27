@@ -1,14 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense, lazy } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../Components/HomePage/Layout";
-import QuestionsModal from "../Components/EventPage/QuestionsModal";
-import QuestionsList from "../Components/EventPage/QuestionsList";
 import CustomSpinner from "../Components/CustomSpinner";
 import { Link } from "react-router-dom";
 import { Tooltip, useToast } from "@chakra-ui/react";
 import NoQuestion from "../Components/EventPage/NoQuestion";
 import ResetEventModal from "../Components/EventPage/ResetEventModal";
+import QuestionsModal from "../Components/EventPage/QuestionsModal";
+
+const QuestionsList = lazy(() => import("../Components/EventPage/QuestionsList"));
 
 const EventPage = () => {
   const { code } = useParams();
@@ -22,44 +23,64 @@ const EventPage = () => {
   const toast = useToast();
 
   const updateEventName = async () => {
-    await axios.put("/event/eventName", {
-      eventCode: code,
-      newEventName: eventName,
-    });
-    setOpenEditModal(false);
+    try{
+      await axios.put("/event/eventName", {
+        eventCode: code,
+        newEventName: eventName,
+      });
+      setOpenEditModal(false);
+    }catch(err){
+      console.error(err.message);
+    }
   };
 
   const deleteQuestion = async (questId) => {
-    if(event.responses.length > 0){
+    try{
+      if (event.responses.length > 0) {
+        return toast({
+          status: "info",
+          title: "Question can't be delete",
+          description: "You can't delete questions which already have responses. You have to reset the event if you want to delete any question.",
+          duration: 6000,
+        })
+      }
+      await axios.delete(`/question/${questId}`);
+      const { data } = await axios.get(`/question/code/${code}`);
+      setQuestions(data);
       return toast({
-        status : "info",
-        title : "Question can't be delete",
-        description : "You can't delete questions which already have responses. You have to reset the event if you want to delete any question.",
-        duration : 6000,
+        status: "success",
+        title: "Question deleted successfully",
       })
+    }catch(err){
+      console.error(err.message);
     }
-    await axios.delete(`/question/${questId}`);
-    const { data } = await axios.get(`/question/code/${code}`);
-    setQuestions(data);
-    return toast({
-      status: "success",
-      title: "Question deleted successfully",
-    })
   };
 
   const handleResetEvent = async () => {
-    await axios.delete(`/event/reset/${code}`);
-    setRefresh(ref => !ref);
+    try{
+      await axios.delete(`/event/reset/${code}`);
+      setRefresh(ref => !ref);
+    }catch(err){
+      console.error(err.message);
+    }
   };
   const fetchEventDetails = async () => {
-    const { data } = await axios.get(`/event/${code}`);
-    setEvent(data);
-    setEventName(data.name);
-    setLoading(false);
+    try{
+      const { data } = await axios.get(`/event/${code}`);
+      setEvent(data);
+      setEventName(data.name);
+      setLoading(false);
+    }catch(err){
+      console.error(err.message);
+    }
   };
   const fetchQuestions = async () => {
-    const { data } = await axios.get(`/question/code/${code}`);
-    setQuestions(data);
+    try{
+      const { data } = await axios.get(`/question/code/${code}`);
+      setQuestions(data);
+    }catch(err){
+      console.error(err.message);
+    }
   };
   useEffect(() => {
     setLoading(true);
@@ -167,7 +188,7 @@ const EventPage = () => {
             audience.
           </h1>
           <div className="ml-auto mt-2 flex gap-3">
-              <ResetEventModal handleResetEvent={handleResetEvent} />
+            <ResetEventModal handleResetEvent={handleResetEvent} />
             <Link
               className="bg-blue py-2 px-3 xs:px-5 rounded-3xl
            text-white font-extrabold hover:scale-105"
@@ -179,14 +200,15 @@ const EventPage = () => {
         </div>
       )}
       <QuestionsModal eventId={event._id} code={code} event={event} />
-      {(questions.length === 0 && !loading) ? <NoQuestion /> :
+      <Suspense fallback={<CustomSpinner />}>
         <QuestionsList
           questions={questions}
           code={code}
           deleteQuestion={deleteQuestion}
           event={event}
         />
-      }
+      </Suspense>
+      {(questions.length === 0 && !loading) && <NoQuestion />}
     </div>
   );
 };

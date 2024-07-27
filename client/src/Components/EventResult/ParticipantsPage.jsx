@@ -54,7 +54,7 @@ const ParticipantsPage = ({ response, code }) => {
             background: "rgb(255, 255, 255)",
             padding: "16px",
             borderRadius: "10px",
-            boxShadow: "rgba(20, 106, 255, 0.1) 0px 10px 45px",
+            boxShadow: "rgba(20, 106, 255, 0.2) 0px 10px 45px",
           }}
         >
           <div className="flex items-center gap-3 w-80">

@@ -1,16 +1,6 @@
-import React, { useEffect,useState } from 'react'
-import CustomSpinner from '../CustomSpinner';
+import React from 'react'
 
 const NoQuestion = () => {
-  const [wait,setWait] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setWait(false);
-    },1000);
-  },[]);
-  
-  if(wait)
-    return <CustomSpinner />;
   return (
     <div className='mt-16 flex flex-col gap-y-1'>
         <p className='text-2xl font-black xs:text-3xl text-blue text-center'>No question are added to the event</p>
