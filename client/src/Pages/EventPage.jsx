@@ -23,19 +23,19 @@ const EventPage = () => {
   const toast = useToast();
 
   const updateEventName = async () => {
-    try{
+    try {
       await axios.put("/event/eventName", {
         eventCode: code,
         newEventName: eventName,
       });
       setOpenEditModal(false);
-    }catch(err){
+    } catch (err) {
       console.error(err.message);
     }
   };
 
   const deleteQuestion = async (questId) => {
-    try{
+    try {
       if (event.responses.length > 0) {
         return toast({
           status: "info",
@@ -51,36 +51,36 @@ const EventPage = () => {
         status: "success",
         title: "Question deleted successfully",
       })
-    }catch(err){
+    } catch (err) {
       console.error(err.message);
     }
   };
 
   const handleResetEvent = async () => {
-    try{
+    try {
       await axios.delete(`/event/reset/${code}`);
       setRefresh(ref => !ref);
-    }catch(err){
+    } catch (err) {
       console.error(err.message);
     }
   };
   const fetchEventDetails = async () => {
-    try{
+    try {
       const { data } = await axios.get(`/event/${code}`);
       setEvent(data);
       setEventName(data.name);
-    }catch(err){
+    } catch (err) {
       console.error(err.message);
     }
   };
   const fetchQuestions = async () => {
-    try{
+    try {
       setLoading(true);
       const { data } = await axios.get(`/question/code/${code}`);
       setQuestions(data);
-    }catch(err){
+    } catch (err) {
       console.error(err.message);
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -89,7 +89,9 @@ const EventPage = () => {
     fetchQuestions();
   }, [refresh]);
 
-  if (loading) return <CustomSpinner />;
+  if(loading){
+    return <CustomSpinner />
+  }
   return (
     <div className="px-4 sm:px-8">
       <Layout />
@@ -201,15 +203,16 @@ const EventPage = () => {
         </div>
       )}
       <QuestionsModal eventId={event._id} code={code} event={event} />
-      <Suspense fallback={<CustomSpinner />}>
-        <QuestionsList
-          questions={questions}
-          code={code}
-          deleteQuestion={deleteQuestion}
-          event={event}
-        />
-      </Suspense>
-      {(questions.length === 0 && !loading) && <NoQuestion />}
+      {(questions.length === 0 && !loading) ? <NoQuestion /> :
+        <Suspense fallback={<CustomSpinner />}>
+          <QuestionsList
+            questions={questions}
+            code={code}
+            deleteQuestion={deleteQuestion}
+            event={event}
+          />
+        </Suspense>
+      }
     </div>
   );
 };

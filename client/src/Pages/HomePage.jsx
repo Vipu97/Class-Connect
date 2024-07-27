@@ -59,7 +59,6 @@ const HomePage = () => {
       fetchEvents();
   }, [userId, refresh])
 
-  if (loading) return <CustomSpinner />;
   return (
     <div className="px-3 xs:px-8">
       <Layout />
@@ -111,10 +110,11 @@ const HomePage = () => {
           <span className="font-extrabold text-white" onClick={createNewEvent}>Create event</span>
         </button>
       </div>
-      <Suspense fallback={<CustomSpinner />}>
-        <EventsList events={events} deleteEvent={deleteEvent} />
-      </Suspense>
-      {(events.length === 0 && !loading) && <NoEvents userName={user.name} createNewEvent={createNewEvent} />
+      {(events.length === 0 && !loading) ? <NoEvents userName={user.name} createNewEvent={createNewEvent}
+      /> :
+        <Suspense fallback={<CustomSpinner />}>
+          <EventsList events={events} deleteEvent={deleteEvent} />
+        </Suspense>
       }
     </div>
   );

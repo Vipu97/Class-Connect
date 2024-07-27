@@ -6,7 +6,7 @@ const CustomSpinner = ({color="blue.500"}) => {
     <div className="flex flex-col h-screen items-center justify-center">
     <Spinner
       color={color}
-      boxSize="150px"
+      boxSize="110px"
       speed="0.7s"
       thickness="5px"
     />
