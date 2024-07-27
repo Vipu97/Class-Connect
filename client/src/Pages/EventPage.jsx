@@ -89,7 +89,7 @@ const EventPage = () => {
     fetchQuestions();
   }, [refresh]);
 
-  if(loading){
+  if (loading) {
     return <CustomSpinner />
   }
   return (
@@ -203,15 +203,16 @@ const EventPage = () => {
         </div>
       )}
       <QuestionsModal eventId={event._id} code={code} event={event} />
-      {(questions.length === 0 && !loading) ? <NoQuestion /> :
-        <Suspense fallback={<CustomSpinner />}>
-          <QuestionsList
-            questions={questions}
-            code={code}
-            deleteQuestion={deleteQuestion}
-            event={event}
-          />
-        </Suspense>
+      {loading ? <CustomSpinner /> :
+        questions.length === 0 ? <NoQuestion /> :
+          <Suspense fallback={<CustomSpinner />}>
+            <QuestionsList
+              questions={questions}
+              code={code}
+              deleteQuestion={deleteQuestion}
+              event={event}
+            />
+          </Suspense>
       }
     </div>
   );

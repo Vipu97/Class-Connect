@@ -110,11 +110,12 @@ const HomePage = () => {
           <span className="font-extrabold text-white" onClick={createNewEvent}>Create event</span>
         </button>
       </div>
-      {(events.length === 0 && !loading) ? <NoEvents userName={user.name} createNewEvent={createNewEvent}
-      /> :
-        <Suspense fallback={<CustomSpinner />}>
-          <EventsList events={events} deleteEvent={deleteEvent} />
-        </Suspense>
+      {loading ? <CustomSpinner /> :
+        events.length === 0 ? <NoEvents userName={user.name} createNewEvent={createNewEvent}
+        /> :
+          <Suspense fallback={<CustomSpinner />}>
+            <EventsList events={events} deleteEvent={deleteEvent} />
+          </Suspense>
       }
     </div>
   );
