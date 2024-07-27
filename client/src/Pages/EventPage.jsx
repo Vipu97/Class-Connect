@@ -69,21 +69,22 @@ const EventPage = () => {
       const { data } = await axios.get(`/event/${code}`);
       setEvent(data);
       setEventName(data.name);
-      setLoading(false);
     }catch(err){
       console.error(err.message);
     }
   };
   const fetchQuestions = async () => {
     try{
+      setLoading(true);
       const { data } = await axios.get(`/question/code/${code}`);
       setQuestions(data);
     }catch(err){
       console.error(err.message);
+    }finally{
+      setLoading(false);
     }
   };
   useEffect(() => {
-    setLoading(true);
     fetchEventDetails();
     fetchQuestions();
   }, [refresh]);
