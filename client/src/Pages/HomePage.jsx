@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback, useEffect, useState, lazy } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Layout from "../Components/HomePage/Layout";
@@ -6,8 +6,7 @@ import CustomSpinner from "../Components/CustomSpinner";
 import { useUserContext } from "../Context/userContext";
 import { useToast } from "@chakra-ui/react";
 import NoEvents from "../Components/HomePage/NoEvents";
-
-const EventsList = lazy(() => import("../Components/HomePage/EventsList"));
+import EventsList from "../Components/HomePage/EventsList"
 
 const HomePage = () => {
   const navigate = useNavigate();
