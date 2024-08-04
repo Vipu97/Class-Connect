@@ -5,10 +5,8 @@ import Layout from "../Components/HomePage/Layout";
 import { useUserContext } from "../Context/userContext";
 import { useToast } from "@chakra-ui/react";
 import NoEvents from "../Components/HomePage/NoEvents";
-import EventsList from "../Components/HomePage/EventsList"
-import plusIcon from "../assets/svgs/plusIcon.svg";
-import computerIcon from "../assets/svgs/computerIcon.svg";
-import CustomSkeleton from "../Components/Loading/CustomSkeleton";
+
+const EventsList = lazy(() => import("../Components/HomePage/EventsList"));
 
 const HomePage = () => {
   const navigate = useNavigate();
