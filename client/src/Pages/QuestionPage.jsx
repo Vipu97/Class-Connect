@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Responded from "../Components/Responded";
-import CustomSpinner from "../Components/CustomSpinner";
+import CustomSpinner from "../Components/Loading/CustomSpinner";
 import { useUserContext } from "../Context/userContext";
 import { useToast } from "@chakra-ui/react";
-import ProfilePopover from "../Components/ProfilePopover";
+import ProfilePopover from "../Components/QuestionDisplay/ProfilePopover";
 import ZeroQuestions from "../Components/QuestionDisplay/ZeroQuestions";
 import List from "../Components/QuestionDisplay/List";
+import Responded from "../Components/QuestionDisplay/Responded";
 
 const QuestionPage = () => {
   const { code } = useParams();
@@ -104,10 +104,9 @@ const QuestionPage = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 1500);
   });
 
-  if (loading) return <CustomSpinner />;
   return (
     <>
       <div>
@@ -127,9 +126,10 @@ const QuestionPage = () => {
             </button>
           )}
         </header>
-        {user && alreadyResponded ? <Responded name={user?.name} /> : (
-          (questions.length === 0 && !loading) ? <ZeroQuestions /> : <List questions={questions} submitAnswer={submitAnswer} response={response} setResponse={setResponse} />
-        )}
+        {loading ? <CustomSpinner /> :
+          user && alreadyResponded ? <Responded name={user?.name} /> : (
+            (questions.length === 0 && !loading) ? <ZeroQuestions /> : <List questions={questions} submitAnswer={submitAnswer} response={response} setResponse={setResponse} />
+          )}
       </div>
 
     </>

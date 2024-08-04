@@ -59,7 +59,7 @@ const List = ({questions,submitAnswer,response,setResponse}) => {
             </main>
             <footer className="my-10 flex justify-center">
                 <button
-                    className="w-full py-2 px-5 text-blue font-black text-2xl max-w-[400px] shadow-question rounded-3xl hover:scale-105 hover:border-blue hover:border-2"
+                    className="w-full py-2 px-5 text-blue font-black text-2xl max-w-[400px] shadow-question rounded-3xl border-2 border-gray-300 hover:scale-105 hover:border-blue hover:border-2"
                     onClick={submitAnswer}
                 >
                     Submit

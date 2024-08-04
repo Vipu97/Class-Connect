@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import Hero from "../Components/IndexPage/Hero";
-import Button from "../Components/Button";
-import Header from "../Components/Header";
+import Button from "../Components/IndexPage/Button";
+import Header from "../Components/IndexPage/Header";
 import Features from "../Components/IndexPage/Features";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import handPhoneImg from "../assets/svgs/handPhone.svg";
 
 const IndexPage = () => {
   const [eventCode, setEventCode] = useState("");
@@ -60,7 +61,7 @@ const IndexPage = () => {
         >
           <div className="flex items-center">
             <img
-              src="/handPhone.svg"
+              src={handPhoneImg}
               alt="hand-image"
               width={"120px"}
               className="relative top-1 object-contain hidden md:inline"

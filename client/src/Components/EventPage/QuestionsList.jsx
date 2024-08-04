@@ -6,10 +6,11 @@ const QuestionsList = ({ questions , deleteQuestion , event}) => {
   return (
     <div className="flex flex-col mt-10">
       {questions?.map((quest, index) => {
+      console.log(quest.type)
         return (
           <div key={index} className="flex justify-between cursor-pointer hover:bg-[#bfdbfe] py-2 rounded-sm border-y-[1px] flex-col gap-y-0 xs:gap-y-2 xs:flex-row md:px-6">
             <div className="flex gap-2 items-center text-[15px] shrink w-full">
-              <img src={`/${quest.type}.svg`} alt="type" width={20}/>
+              <img src={`../src/assets/svgs/${quest.type}.svg`} alt="ques-type" width={20}/>
               <span className="text-14px ml-1">{index + 1}.</span>
               <p className="font-medium text-gray-600 text-wrap 
                max-w-full">

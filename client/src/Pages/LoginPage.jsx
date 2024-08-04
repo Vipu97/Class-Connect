@@ -11,7 +11,7 @@ import {
   getAuth,
 } from "firebase/auth";
 import axios from "axios";
-import CustomSpinner from "../Components/CustomSpinner";
+import CustomSpinner from "../Components/Loading/CustomSpinner";
 
 const LoginPage = () => {
   const toast = useToast();

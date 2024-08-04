@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import CustomSpinner from "../Components/CustomSpinner";
+import CustomSpinner from "../Components/Loading/CustomSpinner";
 import McqOrPoll from "../Components/EventResult/McqOrPoll";
 import Open from "../Components/EventResult/Open";
 import Sort from "../Components/EventResult/Sort";

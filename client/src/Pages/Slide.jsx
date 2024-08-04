@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import BackButton from "../Components/BackButton";
+import BackButton from "../Components/CreateQuestion/BackButton";
 import Photo from "../icons/Photo";
 import axios from "axios";
-import CreateQuestionFooter from "../Components/CreateQuestionFooter";
+import CreateQuestionFooter from "../Components/CreateQuestion/CreateQuestionFooter";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Slide = () => {

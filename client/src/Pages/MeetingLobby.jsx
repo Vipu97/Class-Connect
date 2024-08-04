@@ -2,9 +2,9 @@ import { MeetingProvider } from "@videosdk.live/react-sdk";
 import { useEffect } from "react";
 import { useState } from "react";
 import {MeetingAppProvider} from "../Context/MeetingAppContextDef";
-import { MeetingContainer } from "../meeting/MeetingContainer";
-import LeaveScreen from "../Components/screens/LeaveScreen";
-import { JoiningScreen } from "../Components/screens/JoiningScreen";
+import { MeetingContainer } from "../Components/Meeting/MeetingContainer";
+import LeaveScreen from "../Components/Meeting/screens/LeaveScreen";
+import { JoiningScreen } from "../Components/Meeting/screens/JoiningScreen";
 
 
 export default function MeetingLobby() {

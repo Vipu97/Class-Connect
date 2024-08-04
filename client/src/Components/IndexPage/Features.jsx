@@ -1,6 +1,7 @@
 import React from "react";
-import Button from "../Button";
+import Button from "./Button";
 import { Link } from "react-router-dom";
+import featuresImg from "../../assets/pngs/features-image.png";
 
 const Features = () => {
   return (
@@ -28,7 +29,7 @@ const Features = () => {
         </Link>
       </div>
       <img
-        src={"features-image.png"}
+        src={featuresImg}
         alt="features-image"
         className="hidden lg:inline-block"
       />

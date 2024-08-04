@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
-import Button from "../Button";
+import Button from "../IndexPage/Button";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import handPhoneImg from "../../assets/svgs/handPhone.svg";
 
 const Auth = () => {
   const [eventCode, setEventCode] = useState("");
@@ -54,7 +55,7 @@ const Auth = () => {
           <h1 className="text-[#1d254f] text-[22px] font-black">
             Participate in an event
           </h1>
-          <img src="./handPhone.svg" alt="handphone-image" />
+          <img src={handPhoneImg} alt="handphone-image" />
           <div
             className="flex gap-4 mt-6 py-2 px-3 max-w-[400px] mx-auto
           rounded-[30px] justify-center"

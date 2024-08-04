@@ -11,7 +11,7 @@ import Mcq from "./Pages/Mcq";
 import QuestionPage from "./Pages/QuestionPage";
 import ResultPageHeader from "./Components/EventResult/ResultPageHeader";
 import Poll from "./Pages/Poll";
-import OpenQuestion from "./Pages/OpenQuestion";
+import Open from "./Pages/Open";
 import Sorting from "./Pages/Sorting";
 import MeetingLobby from "./Pages/MeetingLobby";
 import Profile from "./Pages/Profile";
@@ -32,12 +32,12 @@ function App() {
           <Route path="/event/:code" element={<EventPage />} />
           <Route path="/event/:code/mcq" element={<Mcq />} />
           <Route path="/event/:code/poll" element={<Poll />} />
-          <Route path="/event/:code/open" element={<OpenQuestion />} />
+          <Route path="/event/:code/open" element={<Open />} />
           <Route path="/event/:code/sorting" element={<Sorting />} />
           <Route path = "/event/:code/slide" element = {<Slide />} />
           <Route path="/event/edit/:questId/mcq" element={<Mcq />} />
           <Route path="/event/edit/:questId/poll" element={<Poll />} />
-          <Route path="/event/edit/:questId/open" element={<OpenQuestion />} />
+          <Route path="/event/edit/:questId/open" element={<Open />} />
           <Route path="/event/edit/:questId/sorting" element={<Sorting />} />
           <Route path="/event/edit/:questId/slide" element={<Slide />} />
           <Route path="/event/submit/:code" element={<QuestionPage />} />

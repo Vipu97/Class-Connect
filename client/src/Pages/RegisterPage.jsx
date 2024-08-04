@@ -5,25 +5,26 @@ import AuthForm from "../Components/Auth/AuthForm";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
-import CustomSpinner from "../Components/CustomSpinner";
+import CustomSpinner from "../Components/Loading/CustomSpinner";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import profileIcon from "../assets/svgs/profileIcon.svg";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const toast = useToast();
   const navigate = useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
-    try{
+    try {
       setLoading(true);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -35,34 +36,34 @@ const RegisterPage = () => {
       await updateProfile(auth.currentUser, {
         displayName: name,
       });
-      await axios.post("/user" , {name,email,_id:user.uid});
+      await axios.post("/user", { name, email, _id: user.uid });
       navigate("/login");
       toast({
-        status : "success",
-        title : "Registration Successfull"
+        status: "success",
+        title: "Registration Successfull"
       })
-    }catch(error){
-        if(error.code == "auth/email-already-in-use"){
-          return toast({
-            status : "info",
-            title : "Email Already registered",
-            description : "You can directly sign in with the same email"
-          })
-        }
-        else if(error.code == "auth/weak-password"){
-          return toast({
-            status : "warning",
-            title : "Password is too Weak",
-            description : "Minimum 6 characters are required"
-          })
-        }
+    } catch (error) {
+      if (error.code == "auth/email-already-in-use") {
+        return toast({
+          status: "info",
+          title: "Email Already registered",
+          description: "You can directly sign in with the same email"
+        })
       }
-      finally{
-        setLoading(false);
+      else if (error.code == "auth/weak-password") {
+        return toast({
+          status: "warning",
+          title: "Password is too Weak",
+          description: "Minimum 6 characters are required"
+        })
       }
+    }
+    finally {
+      setLoading(false);
+    }
   };
-  
-  if(loading)
+
+  if (loading)
     return <CustomSpinner />
   return (
     <div>
@@ -91,18 +92,7 @@ const RegisterPage = () => {
               </Link>
             </span>
             <div className="flex w-full max-w-[320px] relative right-1 lg:mt-5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="#1d254f"
-                className="w-5 h-6 relative top-[23px] left-7"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              <img src={profileIcon} alt="profile-icon" className="w-5 h-6 relative top-[23px] left-7" />
               <input
                 type="text"
                 placeholder="Name"

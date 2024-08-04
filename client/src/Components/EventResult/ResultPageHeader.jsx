@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import EventResultPage from "../../Pages/EventResultPage";
 import axios from "axios";
-import CustomSpinner from "../CustomSpinner";
+import CustomSpinner from "../Loading/CustomSpinner";
 import ParticipantsPage from "./ParticipantsPage";
 
 const ResultPageHeader = () => {

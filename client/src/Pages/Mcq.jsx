@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import McqOption from "../Components/McqOption";
+import McqOption from "../Components/CreateQuestion/McqOption";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import BackButton from "../Components/BackButton";
-import CreateQuestionFooter from "../Components/CreateQuestionFooter";
+import BackButton from "../Components/CreateQuestion/BackButton";
+import CreateQuestionFooter from "../Components/CreateQuestion/CreateQuestionFooter";
 
 const Mcq = () => {
   const {code,questId} = useParams();
@@ -144,7 +144,7 @@ const Mcq = () => {
             );
           })}
           <button
-            className="mr-auto px-3 py-[-10px] rounded-3xl  border-2 border-gray-200 
+            className="mr-auto px-3 py-[-10px] rounded-3xl  border-2 border-gray-300 mb-12
             hover:border-blue"
             onClick={createNewOption}
           >

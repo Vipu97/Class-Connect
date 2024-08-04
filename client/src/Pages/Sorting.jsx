@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useCallback } from "react";
-import BackButton from "../Components/BackButton";
+import BackButton from "../Components/CreateQuestion/BackButton";
 import { useNavigate, useParams } from "react-router-dom";
-import CreateQuestionFooter from "../Components/CreateQuestionFooter";
+import CreateQuestionFooter from "../Components/CreateQuestion/CreateQuestionFooter";
 import { useRef } from "react";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
@@ -127,11 +127,11 @@ const Sorting = () => {
               )
             })}
              <button
-            className="mr-auto px-3 py-[-10px] rounded-3xl  border-2 border-gray-200 
+            className="mr-auto px-3 py-[-10px] rounded-3xl  border-2 border-gray-300 mb-12
             hover:border-blue"
             onClick={() => setOptions((prev) => [...prev , {input : ""}])}
           >
-            <span className="text-[25px] text-gray-500">+</span>
+            <span className="text-[25px] text-gray-700">+</span>
           </button>
           </div>
         </div>
