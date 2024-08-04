@@ -81,7 +81,7 @@ const EventResultPage = ({ response, code }) => {
                 className="flex gap-2 text-[22px]
                  text-[#1d254f]"
               >
-                <img src={`/${ques.type}.svg`} alt="question-icons" className="mr-2 h-[22px] w-[26px] mt-1" />
+                <img src={`/src/assets/svgs/${ques.type}.svg`} alt="question-icons" className="mr-2 h-[22px] w-[26px] mt-1" />
                 <h1>{index + 1}.</h1>
                 <h1>{ques.question}</h1>
               </div>

@@ -6,7 +6,6 @@ const QuestionsList = ({ questions , deleteQuestion , event}) => {
   return (
     <div className="flex flex-col mt-10">
       {questions?.map((quest, index) => {
-      console.log(quest.type)
         return (
           <div key={index} className="flex justify-between cursor-pointer hover:bg-[#bfdbfe] py-2 rounded-sm border-y-[1px] flex-col gap-y-0 xs:gap-y-2 xs:flex-row md:px-6">
             <div className="flex gap-2 items-center text-[15px] shrink w-full">

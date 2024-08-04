@@ -1,12 +1,14 @@
-import React, { Suspense, useCallback, useEffect, useState } from "react";
+import React, {useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Layout from "../Components/HomePage/Layout";
 import { useUserContext } from "../Context/userContext";
 import { useToast } from "@chakra-ui/react";
 import NoEvents from "../Components/HomePage/NoEvents";
-
-const EventsList = lazy(() => import("../Components/HomePage/EventsList"));
+import EventsList from "../Components/HomePage/EventsList";
+import computerIcon from "../assets/svgs/computerIcon.svg";
+import plusIcon from "../assets/svgs/plusIcon.svg";
+import CustomSkeleton from "../Components/Loading/CustomSkeleton";
 
 const HomePage = () => {
   const navigate = useNavigate();

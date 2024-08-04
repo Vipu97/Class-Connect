@@ -4,6 +4,7 @@ import EventResultPage from "../../Pages/EventResultPage";
 import axios from "axios";
 import CustomSpinner from "../Loading/CustomSpinner";
 import ParticipantsPage from "./ParticipantsPage";
+import leftArrow from "../../assets/svgs/leftArrow.svg";
 
 const ResultPageHeader = () => {
   const { code } = useParams();
@@ -30,18 +31,7 @@ const ResultPageHeader = () => {
         className="font-bold py-1.5 px-2 pr-4 w-24 border-2 border-gray-300 rounded-3xl hover:bg-cyan-50 flex items-center gap-1"
         to={`/event/${code}`}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="w-5 h-5"
-        >
-          <path
-            fillRule="evenodd"
-            d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <img src={leftArrow} alt="left-arrow" className="w-5 h-5"/>
         <span className="font-black">Back</span>
       </Link>
       <header className="flex flex-col justify-center">

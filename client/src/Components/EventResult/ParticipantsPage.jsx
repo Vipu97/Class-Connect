@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import axios from "axios";
 import CorrectIcon from "./CorrectIcon";
+import profileIcon from "../../assets/svgs/profileIcon.svg";
 
 const ArrowDown = () => {
   return (
@@ -58,20 +59,7 @@ const ParticipantsPage = ({ response, code }) => {
           }}
         >
           <div className="flex items-center gap-3 w-80">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="black"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              className="w-5 h-5 relative bottom-0.5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-              />
-            </svg>
+            <img src={profileIcon} alt="profile-icon" className="w-5 h-5 relative bottom-0.5" />
             <span>{selectedName || "Select a student"}</span>
           </div>
         </MenuButton>
@@ -105,7 +93,7 @@ const ParticipantsPage = ({ response, code }) => {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img
-                    src={`/${ques.type}.svg`}
+                    src={`/src/assets/svgs/${ques.type}.svg`}
                     alt=""
                     height={"15px"}
                     width={"20px"}

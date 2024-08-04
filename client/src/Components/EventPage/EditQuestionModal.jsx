@@ -25,7 +25,7 @@ export default function EditQuestionModal({questId,questType,event}) {
     }
     return (
       <> 
-        <button className="h-[35px] py-1.5 px-4 font-black text-gray-500bg-transparent hover:text-blue rounded-3xl hover:bg-white" onClick={handleEditQuestion}>
+        <button className="h-[35px] py-1.5 px-4 font-black text-gray-500 bg-transparent hover:text-blue rounded-3xl hover:bg-white" onClick={handleEditQuestion}>
             Edit
         </button>
   
