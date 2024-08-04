@@ -1,3 +1,9 @@
+import mcq from "../assets/svgs/mcq.svg";
+import poll from "../assets/svgs/poll.svg";
+import open from "../assets/svgs/open.svg";
+import sorting from "../assets/svgs/sorting.svg";
+import slide from "../assets/svgs/slide.svg";
+
 export const trimSnackBarText = (text = "") => {
     const maxLength = 52;
   
@@ -36,3 +42,13 @@ export const trimSnackBarText = (text = "") => {
     return strTime;
   }
   
+
+  export function createIconsMap(){
+    const stringToIconMap = new Map();
+    stringToIconMap.set("mcq",mcq);
+    stringToIconMap.set("poll",poll);
+    stringToIconMap.set("open",open);
+    stringToIconMap.set("sorting",sorting);
+    stringToIconMap.set("slide",slide)
+    return stringToIconMap;
+  }

@@ -5,6 +5,9 @@ import McqOrPoll from "../Components/EventResult/McqOrPoll";
 import Open from "../Components/EventResult/Open";
 import Sort from "../Components/EventResult/Sort";
 import Slide from "../Components/EventResult/Slide";
+import {createIconsMap} from "../utils/helper";
+
+const iconsMap = createIconsMap();
 
 const EventResultPage = ({ response, code }) => {
   const [loading, setLoading] = useState(true);
@@ -81,7 +84,7 @@ const EventResultPage = ({ response, code }) => {
                 className="flex gap-2 text-[22px]
                  text-[#1d254f]"
               >
-                <img src={`/src/assets/svgs/${ques.type}.svg`} alt="question-icons" className="mr-2 h-[22px] w-[26px] mt-1" />
+                <img src={iconsMap.get(ques.type)} alt="question-icons" className="mr-2 h-[22px] w-[26px] mt-1" />
                 <h1>{index + 1}.</h1>
                 <h1>{ques.question}</h1>
               </div>

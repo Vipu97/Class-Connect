@@ -3,6 +3,9 @@ import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import axios from "axios";
 import CorrectIcon from "./CorrectIcon";
 import profileIcon from "../../assets/svgs/profileIcon.svg";
+import {createIconsMap} from "../../utils/helper";
+
+const iconsMap = createIconsMap();
 
 const ArrowDown = () => {
   return (
@@ -93,8 +96,8 @@ const ParticipantsPage = ({ response, code }) => {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img
-                    src={`/src/assets/svgs/${ques.type}.svg`}
-                    alt=""
+                    src={iconsMap.get(ques.type)}
+                    alt="ques-icon"
                     height={"15px"}
                     width={"20px"}
                   />
