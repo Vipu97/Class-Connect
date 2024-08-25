@@ -36,13 +36,13 @@ const AuthForm = ({
       if (returnUrl) {
         sessionStorage.removeItem("returnUrl");
         navigate(returnUrl);
+        setLoading(false);
       } else {
         navigate("/home");
+        setLoading(false);
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      setLoading(false);
     }
   };
 

@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 dotenv.config();
 const port = process.env.PORT;
 
-const allowedOrigins = [process.env.CLIENT_URL1,process.env.CLIENT_URL2];
+const allowedOrigins = [process.env.CLIENT_URL];
 
 // Configure CORS middleware with multiple allowed origins
 app.use(cors({

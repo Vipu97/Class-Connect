@@ -90,7 +90,7 @@ const HomePage = () => {
         </button>
       </div>
       {loading ? <CustomSkeleton /> :
-        events.length === 0 ? <NoEvents userName={user.name} createNewEvent={createNewEvent}
+        events.length === 0 ? <NoEvents userName={user?.name} createNewEvent={createNewEvent}
         /> :<EventsList events={events} deleteEvent={deleteEvent} />
       }
     </div>
