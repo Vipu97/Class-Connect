@@ -52,7 +52,7 @@ const IndexPage = () => {
       <Header />
       <div className="w-full">
         <div
-          className="w-full mx-auto flex flex-col gap-y-4 justify-between p-4 mt-6 items-center sm:flex-row max-w-[768px]
+          className="w-full mx-auto flex flex-col gap-y-4 justify-between p-4 mt-16 items-center sm:flex-row max-w-[768px] 
         md:rounded-[40px] md:px-8 overflow-hidden md:h-20"
           style={{
             backgroundImage:
