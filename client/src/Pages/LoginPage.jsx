@@ -90,14 +90,13 @@ const LoginPage = () => {
       {/* header */}
       <AuthHeader text="Sign up" />
 
-      <div className="flex flex-col gap-8 lg:flex-row">
+      <div className="flex flex-col gap-y-8 lg:flex-row">
         {/* left side */}
         <Auth />
 
         {/* right side */}
         <div
-          className="flex justify-center items-center w-full lg:bg-[#f1f3f8] lg:relative lg:bottom-[86px] 
-        lg:z-10 lg:py-20 lg:h-[100vh]"
+          className="flex justify-center items-center w-full lg:bg-[#f1f3f8] lg:relative lg:bottom-[86px] lg:z-10 lg:py-20 lg:h-[100vh]"
         >
           <div className="flex flex-col justify-center mt-7 w-full max-w-[320px] mx-auto items-center">
             <h1 className="text-[22px] font-black text-[#1d254f] text-center">
