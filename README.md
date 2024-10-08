@@ -1,4 +1,4 @@
-# Virtual Classroom
+# Class Connect
 
 ## Overview
 
